@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+</head>
+<body>
+<h2>Welcome, please log in</h2>
+<ul id="menu">
+    <style>
+        body {
+           margin: 0;
+           background: #FFFFFF;
+        }
+
+        #menu {
+           background-color: #0B0719;
+           margin: 0;
+           margin-top: 100px;
+        }
+
+        ul {
+           list-style-type: none;
+           margin: 0;
+           padding: 0;
+           overflow: hidden;
+           background-color: #333;
+        }
+
+        #menu li {
+           float: left;
+        }
+
+        #menu li a {
+           text-decoration: none;
+           text-align: center;
+           display: inline-block;
+           color: #EFEFFB;
+           font-size: 18px;
+           font-weight: 500;
+           font-family: Arial;
+           padding: 12px 18px;
+        }
+
+        #menu li a:hover {
+           background-color: #EFEFFB;
+           color: #0A0A2A;
+        }
+
+        .active {
+           background-color: #EFEFFB;
+           color: #0A0A2A;
+        }
+    </style>
+
+    <li><a href="trips.html">Trips</a></li>
+    <li><a href="profile.html">Profile</a></li>
+    <li><a href="login.html">Login</a></li>
+</ul>
+
+<form action="/login.html">
+    <style>
+        form {
+           border: 3px solid #f1f1f1;
+        }
+
+        input[type="text"], input[type="password"] {
+           width: 100%;
+           padding: 12px 20px;
+           margin: 8px 0;
+           display: inline-block;
+           border: 1px solid #ccc;
+           box-sizing: border-box;
+        }
+
+        button {
+           background-color: #4CAF50;
+           color: white;
+           padding: 14px 20px;
+           margin-top: 120px;
+           margin: 8px 0;
+           border: none;
+           cursor: pointer;
+           width: 100%;
+        }
+
+        button:hover {
+           opacity: 0.8;
+        }
+
+        .registerButton {
+           width: auto;
+           padding: 10px 18px;
+           background-color: #0066ff;
+        }
+
+        .fields {
+           padding: 16px;
+        }
+
+        span.password {
+           float: right;
+           padding-top: 16px;
+        }
+    </style>
+    <div class="fields">
+        <label>Username</label>
+        <input type="text" placeholder="Enter Username" name="username" required>
+
+        <label>Password</label>
+        <input type="password" placeholder="Enter Password" name="password" required>
+
+        <button type="submit">Login</button>
+        <label>
+            <input type="checkbox" checked="checked" name="remember">Remember me
+        </label>
+    </div>
+
+    <div class="fields" style="background-color:#f1f1f1">
+        <button type="button" class="registerButton">Register</button>
+        <span class="password">Forgot <a href="#">password?</a></span>
+    </div>
+</form>
+</body>
+</html>
