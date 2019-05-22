@@ -1,0 +1,121 @@
+* {
+    font-family: Arial;
+    font-weight: normal;
+}
+
+.container {
+    margin-top: 20px;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.tripSection {
+    margin-bottom: 10px;
+}
+
+.header {
+    border: 0;
+    margin: auto;
+}
+
+.section {
+    border: 0;
+    margin: auto;
+}
+
+.form-control {
+    border: 0.5px solid #C0C0C0;
+}
+
+.form-group div {
+    margin-bottom: 10px;
+}
+
+input {
+    width: 80px;
+    margin-right: 2.5px;
+}
+
+label {
+    border: 0;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: default;
+    color: #5D6D7E;
+}
+
+.control-label label {
+    border: 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: #5D6D7E ;
+}
+
+textarea {
+    resize: none;
+    font-family: Apple Chancery, cursive;
+    color: #618685;
+}
+
+.content {
+    background-color: white;
+    height: 530px;
+    width: 750px;
+    float: center;
+    border: 0.5px solid #C0C0C0;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.article1 {
+    background-color: #F5F5F5;
+    height: 500px;
+    font-family: Apple Chancery, cursive;
+    float: left;
+    border: 0.5px solid #C0C0C0;
+    box-shadow: 2px, 2px;
+    margin-top: 15px;
+    margin-left: 5px;
+}
+
+.article2 {
+    background-color: #F5F5F5;
+    height: 500px;
+    font-family: Apple Chancery, cursive;
+    float: right;
+    border: 0.5px solid #C0C0C0;
+    box-shadow: 2px, 2px;
+    margin-top: 15px;
+    margin-left: 5px;
+}
+
+h3 {
+    font-height: 18px;
+    font-family: Arial Black, sans-serif;
+    color: #36486b;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-family: Apple Chancery, cursive;
+    font-height: 14px;
+    font-weight: normal;
+    color: #618685;
+    margin: 5px;
+}
+
+.sidebar {
+    background-color: white;
+    height: 530px;
+    width: 330px;
+    float: center;
+    border: 0.5px solid #C0C0C0;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+

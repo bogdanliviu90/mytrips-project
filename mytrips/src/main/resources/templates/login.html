@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Login Page</title>
+
+	<script src="https://code.jquery.com/jquery-3.4.0.js"
+	        integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
+	        crossorigin="anonymous">
+
+	</script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	      crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	      crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="/css/login-style.css">
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	        crossorigin="anonymous">
+	</script>
+
+</head>
+<body>
+
+<!-- HEADER -->
+
+<div class="header">
+
+	<!-- Navbar Menu -->
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a th:href="@{/registration}"><span class="glyphicon glyphicon-pencil"></span> Sign Up</a></li>
+				<li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Sign In</a></li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<!-- CONTAINER: LOGIN FORM -->
+
+<div class="container-fluid bg">
+
+	<div class="row">
+
+		<!-- spacing -->
+
+		<div class="col-md-4"></div>
+
+		<!-- Login Form -->
+
+		<div class="col-md-4" style="float: bottom;">
+			<div class="form-container">
+				<form th:action="@{/login}" method="post">
+					<div class="form-group">
+						<legend class="legend"><h2>Welcome to MyTrips</h2></legend>
+					</div>
+					<div><p th:text="${message}"></p></div>
+					<div class="form-group">
+						<label class="control-label" for="username">Username</label>
+						<input type="text" id="username" name="username" placeholder="Enter Username"
+						       required="required"/>
+
+						<label class="control-label" for="password">Password</label>
+						<input type="password" id="password" name="password" placeholder="Enter Password"
+						       required="required"/>
+						<div><p th:text="${error}"></p></div>
+						<button class="btn btn-danger" onclick="/profile" type="submit">Log In</button>
+						<a th:href="@{/registration}" class="btn btn-primary">Sign Up</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

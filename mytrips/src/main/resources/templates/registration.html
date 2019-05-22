@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Registration Page</title>
+	<script
+			src="https://code.jquery.com/jquery-3.4.0.js"
+			integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
+			crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	      crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	      crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="/css/registration-style.css">
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	        crossorigin="anonymous">
+	</script>
+
+</head>
+
+<body>
+
+<!-- HEADER: Navbar Menu -->
+
+<div class="header">
+
+	<!-- Navbar Menu -->
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+			</div>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<!-- CONTAINER -->
+
+<div class="container">
+	<div class="col-md-3"></div>
+	<form class="form-signin" th:action="@{/registration}" th:object="${user}" method="post">
+		<div class="col-md-6">
+			<h1 class="text-center">Sign Up</h1>
+
+			<!-- First Name -->
+
+			<label class="label control-label" for="firstName">First Name</label>
+			<div class="input-group">
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-user"></span>
+					</span>
+				<input class="form-control" id="firstName" type="text" th:field="*{firstName}"
+				       placeholder="Add First Name" required="required"/>
+			</div>
+			<div>
+				<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger"></p>
+			</div>
+
+			<!-- Last Name -->
+
+			<label class="label control-label" for="lastName">Last Name</label>
+			<div class="input-group">
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-user"></span>
+					</span>
+				<input class="form-control" id="lastName" type="text" th:field="*{lastName}"
+				       placeholder="Add Last Name" required="required"/>
+			</div>
+			<div>
+				<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger"></p>
+			</div>
+
+			<!-- Username -->
+
+			<label class="label control-label" for="username">Username</label>
+			<div class="input-group">
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-eye-open"></span>
+					</span>
+				<input class="form-control" id="username" type="text" th:field="*{username}"
+				       placeholder="Add Username" required="required"/>
+			</div>
+			<div>
+				<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger"></p>
+			</div>
+
+			<!-- Password -->
+
+			<label class="label control-label" for="password">Password</label>
+			<div class="input-group">
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-lock"></span>
+					</span>
+				<input type="password" class="form-control" id="password" th:field="*{password}"
+				       placeholder="Enter Password" required="required">
+			</div>
+			<div>
+				<ul class="text-danger" th:each="error: ${#fields.errors('password')}">
+					<li th:each="message : ${error.split(',')}">
+						<p class="text-danger" th:text="${message}"></p>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Password Confirm -->
+
+			<label class="label control-label" for="passwordConfirm">Confirm Password</label>
+			<div class="input-group">
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-lock"></span>
+					</span>
+				<input type="password" class="form-control" id="passwordConfirm" th:field="*{passwordConfirm}"
+				       placeholder="Confirm Password" required="required">
+			</div>
+			<div>
+				<p th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"
+				   class="text-danger"></p>
+			</div>
+
+			<!-- City -->
+
+			<label class="label control-label" for="city">City</label>
+			<div class="input-group">
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-map-marker"></span>
+					</span>
+				<input type="text" class="form-control" id="city" th:field="*{city}"
+				       placeholder="Enter City" required="required">
+			</div>
+			<div>
+				<p th:if="${#fields.hasErrors('city')}" th:errors="*{city}"
+				   class="text-danger"></p>
+			</div>
+
+			<!-- Address -->
+
+			<label class="label control-label" for="address">Address</label>
+			<div class="input-group">
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-envelope"></span>
+					</span>
+				<input type="text" class="form-control" id="address" th:field="*{address}"
+				       placeholder="Enter Address" required="required">
+			</div>
+			<div>
+				<p th:if="${#fields.hasErrors('address')}" th:errors="*{address}"
+				   class="text-danger"></p>
+			</div>
+
+			<!-- Phone -->
+
+			<label class="label control-label" for="phone">Phone</label>
+			<div class="input-group">
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-earphone"></span>
+					</span>
+				<input type="text" class="form-control" id="phone" th:field="*{phone}"
+				       placeholder="Enter Phone number" required="required">
+			</div>
+			<div>
+				<p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"
+				   class="text-danger"></p>
+			</div>
+
+			<!-- Sign Up Button-->
+
+			<label class="label control-label"></label>
+			<div class="input-group">
+					<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-check"></span> Sign
+						Up</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+</body>
+</html>

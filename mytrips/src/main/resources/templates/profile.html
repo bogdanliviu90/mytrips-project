@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>My Profile</title>
+
+	<script src="https://code.jquery.com/jquery-3.4.0.js"
+	        integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
+	        crossorigin="anonymous">
+
+	</script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	      crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	      crossorigin="anonymous">
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	        crossorigin="anonymous">
+	</script>
+
+</head>
+<body>
+
+<style>
+* {
+    font-family: Arial;
+}
+
+.container {
+    margin-top: 100px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.row {
+    margin: auto;
+}
+
+legend {
+    border: 0;
+    text-size: 34px;
+}
+
+label {
+    text-align: right;
+    font-size: 14px;
+    font-weight: normal;
+    color: black;
+}
+
+.form-group div {
+    margin-bottom: 10px;
+}
+
+
+
+
+
+</style>
+
+<!-- HEADER -->
+
+<div class="header">
+
+	<!-- Navbar Menu -->
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" th:href="@{/trips}">myTrips</a>
+			</div>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a th:href="@{/profile}"><span class="glyphicon glyphicon-pencil"></span> Profile</a></li>
+				<li><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<!-- CONTAINER - FORM INFORMATION -->
+
+<div class="container">
+
+	<div class="row">
+
+		<!-- Form Name -->
+
+		<legend class="col-md-6" style="text-align: center;"><span
+				th:text="${user.firstName}"></span>'s Profile
+		</legend>
+
+		<!-- spacing -->
+
+		<div class="col-md-3">
+		</div>
+
+		<!-- Edit Profile button -->
+
+		<form method="get" action="/profile/edit">
+			<button class="col-md-1 btn btn-primary" type="submit">Edit Profile</button>
+		</form>
+
+	</div>
+
+	<form class="form-signin" th:action="@{/profile}" th:object="${user}" method="get">
+
+		<!-- First Name -->
+
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="firstName">First Name</label>
+			<div class="col-md-7 inputGroupContainer">
+				<div class="input-group"><span class="input-group-addon"><i
+						class="glyphicon glyphicon-user"></i> </span>
+					<input class="form-control" id="firstName" type="text" th:value="${user.firstName}"
+					       readonly="readonly"/>
+				</div>
+			</div>
+		</div>
+
+		<!-- Last Name -->
+
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="lastName">Last Name</label>
+			<div class="col-md-7 inputGroupContainer">
+				<div class="input-group"><span class="input-group-addon"><i
+						class="glyphicon glyphicon-user"></i> </span>
+					<input class="form-control" id="lastName" type="text" th:value="${user.lastName}"
+					       readonly="readonly"/>
+				</div>
+			</div>
+		</div>
+
+		<!-- Username -->
+
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="username">Username</label>
+			<div class="col-md-7 inputGroupContainer">
+				<div class="input-group"><span class="input-group-addon"><i
+						class="glyphicon glyphicon-globe"></i> </span>
+					<input class="form-control" id="username" type="text" th:value="${user.username}"
+					       readonly="readonly"/>
+				</div>
+			</div>
+		</div>
+
+		<!-- City -->
+
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="city">City</label>
+			<div class="col-md-7 inputGroupContainer">
+				<div class="input-group"><span class="input-group-addon"><i
+						class="glyphicon glyphicon-map-marker"></i> </span>
+					<input class="form-control" id="city" type="text" th:value="${user.city}"
+					       readonly="readonly"/>
+				</div>
+			</div>
+		</div>
+
+		<!-- Address -->
+
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="address">Address</label>
+			<div class="col-md-7 inputGroupContainer">
+				<div class="input-group"><span class="input-group-addon"><i
+						class="glyphicon glyphicon-home"></i> </span>
+					<input class="form-control" id="address" type="text" th:value="${user.address}"
+					       readonly="readonly"/>
+				</div>
+			</div>
+		</div>
+
+		<!-- Phone -->
+
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="phone">Phone</label>
+			<div class="col-md-7 inputGroupContainer">
+				<div class="input-group"><span class="input-group-addon"><i
+						class="glyphicon glyphicon-earphone"></i> </span>
+					<input class="form-control" id="phone" type="text" th:value="${user.phone}"
+					       readonly="readonly"/>
+				</div>
+			</div>
+		</div>
+
+	</form>
+
+</div>
+</body>
+</html>

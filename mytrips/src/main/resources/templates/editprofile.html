@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Profile Page</title>
+
+	<script
+			src="https://code.jquery.com/jquery-3.4.0.js"
+			integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
+			crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	      crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	      crossorigin="anonymous">
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	        crossorigin="anonymous">
+	</script>
+
+</head>
+<body>
+
+<style>
+* {
+    font-family: Arial;
+}
+
+container {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+legend {
+    border: 0;
+    text-size: 32px;
+}
+
+label {
+    text-align: right;
+    font-size: 14px;
+    color: black;
+}
+
+.form-group div {
+    margin-bottom: 10px;
+}
+
+
+
+</style>
+
+<!-- HEADER -->
+
+<div class="header">
+
+	<!-- Navbar Menu -->
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" th:href="@{/trips}">myTrips</a>
+			</div>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a th:href="@{/profile}"><span class="glyphicon glyphicon-pencil"></span> Profile</a></li>
+				<li><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<!-- CONTAINER -->
+
+<div class="container">
+	<form class="form-signin" th:action="@{/profile/edit}" th:object="${user}" method="post">
+		<input type="hidden" th:field="*{id}"/>
+
+		<!-- Form Name -->
+
+		<legend class="col-md-12" style="text-align: center;">Edit My Profile</legend>
+
+		<!-- First Name -->
+
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="firstName">First Name</label>
+			<div class="col-md-7 inputGroupContainer">
+				<div class="input-group"><span class="input-group-addon"><i
+						class="glyphicon glyphicon-user"></i> </span>
+					<input class="form-control" id="firstName" type="text" th:field="*{firstName}"
+					       placeholder="Your First Name"/>
+				</div>
+				<small class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></small>
+			</div>
+		</div>
+
+		<!-- Last Name -->
+
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="lastName">Last Name</label>
+			<div class="col-md-7 inputGroupContainer">
+				<div class="input-group"><span class="input-group-addon"><i
+						class="glyphicon glyphicon-user"></i> </span>
+					<input class="form-control" id="lastName" type="text" th:field="*{lastName}"
+					       placeholder="Your Last Name"/>
+				</div>
+				<small class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></small>
+			</div>
+		</div>
+
+		<!-- Username -->
+
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="username">Username</label>
+			<div class="col-md-7 inputGroupContainer">
+				<div class="input-group"><span class="input-group-addon"><i
+						class="glyphicon glyphicon-globe"></i> </span>
+					<input class="form-control" id="username" type="text" th:field="*{username}"
+					       placeholder="Your Username"/>
+				</div>
+				<small class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
+			</div>
+		</div>
+
+		<!-- Password -->
+
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="password">Password</label>
+			<div class="col-md-7 inputGroupContainer">
+				<div class="input-group"><span class="input-group-addon"><i
+						class="glyphicon glyphicon-lock"></i> </span>
+					<input class="form-control" id="password" type="password" name="password" th:field="*{password}"
+					       placeholder="Password"/>
+				</div>
+				<div>
+					<ul class="text-danger" th:each="error: ${#fields.errors('password')}">
+						<li th:each="message : ${error.split(',')}">
+							<p class="text-danger" th:text="${message}"></p>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Button: Show Password -->
+
+			<div class="col-md-1">
+				<button class="btn btn-warning" type="button" id="showPassword">Show Password</button>
+			</div>
+		</div>
+
+		<!-- Password Confirm -->
+
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="passwordConfirm">Confirm Password</label>
+			<div class="col-md-7 inputGroupContainer">
+				<div class="input-group"><span class="input-group-addon"><i
+						class="glyphicon glyphicon-lock"></i> </span>
+					<input class="form-control" id="passwordConfirm" type="password" th:field="*{passwordConfirm}"
+					       placeholder="Confirm Password"/>
+				</div>
+				<small class="text-danger" th:if="${#fields.hasErrors('passwordConfirm')}"
+				       th:errors="*{passwordConfirm}">
+				</small>
+			</div>
+
+			<!-- Button: Show Password Confirm -->
+
+			<div class="col-md-1">
+				<button class="btn btn-warning" type="button" id="showPasswordConfirm">Show Password</button>
+			</div>
+		</div>
+
+		<!-- City -->
+
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="city">City</label>
+			<div class="col-md-7 inputGroupContainer">
+				<div class="input-group"><span class="input-group-addon"><i
+						class="glyphicon glyphicon-map-marker"></i> </span>
+					<input class="form-control" id="city" type="text" th:field="*{city}"
+					       placeholder="Edit City"/>
+				</div>
+				<small class="text-danger" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></small>
+			</div>
+		</div>
+
+		<!-- Address -->
+
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="address">Address</label>
+			<div class="col-md-7 inputGroupContainer">
+				<div class="input-group"><span class="input-group-addon"><i
+						class="glyphicon glyphicon-home"></i> </span>
+					<input class="form-control" id="address" type="text" th:field="*{address}"
+					       placeholder="Edit Address"/>
+				</div>
+				<small class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></small>
+			</div>
+		</div>
+
+		<!-- Phone -->
+
+		<div class="form-group">
+			<label class="col-md-3 control-label" for="phone">Phone</label>
+			<div class="col-md-7 inputGroupContainer">
+				<div class="input-group"><span class="input-group-addon"><i
+						class="glyphicon glyphicon-earphone"></i> </span>
+					<input class="form-control" id="phone" type="text" th:field="*{phone}"
+					       placeholder="Edit Phone Number"/>
+				</div>
+				<small class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></small>
+			</div>
+		</div>
+
+		<!-- Button: Save Changes -->
+
+		<div class="form-group">
+			<label class="col-md-3 control-label"></label>
+			<div class="col-md-4">
+				<button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-floppy-saved">
+			</span> Save Changes
+				</button>
+			</div>
+		</div>
+		<div><p th:text="${error}"></p></div>
+	</form>
+</div>
+
+<!-- Show Password: Functions-->
+
+<script>
+
+	$(document).ready(function(){
+	    $('#showPassword').on('click', function(){
+	        var passwordField = $('#password');
+	        var passwordFieldType = passwordField.attr('type');
+	        if (passwordFieldType == 'password')
+	        {
+	            passwordField.attr('type', 'text');
+	            $(this).text('Hide');
+	        }
+	        else
+	        {
+	            passwordField.attr('type', 'password');
+	            $(this).text('Show Password');
+	        }
+	    });
+	});
+
+	$(document).ready(function(){
+	    $('#showPasswordConfirm').on('click', function(){
+	        var passwordField = $('#passwordConfirm');
+	        var passwordFieldType = passwordField.attr('type');
+	        if (passwordFieldType == 'password')
+	        {
+	            passwordField.attr('type', 'text');
+	            $(this).text('Hide');
+	        }
+	        else
+	        {
+	            passwordField.attr('type', 'password');
+	            $(this).text('Show Password');
+	        }
+	    });
+	});
+
+</script>
+
+</body>
+</html>
