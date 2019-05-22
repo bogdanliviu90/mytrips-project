@@ -1,0 +1,57 @@
+<style>
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    font-family: Arial;
+    background-image: linear-gradient(to bottom, #d1d0d0, #dcdcdc, #e8e7e8, #f3f3f3, #ffffff);
+}
+
+h1{
+    font-size: 32px;
+    color: black;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.col-md-6{
+    background: white;
+    border: 2px solid #36486b;
+    border-radius: 10px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    box-shadow: 5px 5px #7F8C8D;
+}
+
+.form-control {
+    background: transparent;
+    border: 0;
+}
+
+.label{
+    font-size: 14px;
+    font-weight: normal;
+    color: black;
+    border: 0;
+}
+
+.input-group {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    width: 150px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    float: center;
+}

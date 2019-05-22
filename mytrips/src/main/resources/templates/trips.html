@@ -1,10 +1,242 @@
 <!DOCTYPE html>
-<html xmlns:th = "www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Trips Page</title>
+
+	<title>Trips Page</title>
+	<meta charset="UTF-8">
+
+	<script src="https://code.jquery.com/jquery-3.4.0.js"
+	        integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
+	        crossorigin="anonymous">
+
+	</script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	      crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	      crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="/css/trips-style.css">
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	        crossorigin="anonymous">
+	</script>
+
 </head>
 <body>
 
+<!-- HEADER -->
+
+<div class="header">
+
+	<!-- Navbar Menu -->
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" th:href="@{/trips}">myTrips</a>
+			</div>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a th:href="@{/profile}"><span class="glyphicon glyphicon-pencil"></span> Profile</a></li>
+				<li><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<!-- CONTAINER -->
+
+<div class="container">
+
+	<!-- SECTION: TRIP SELECT -->
+
+	<!-- Trips dropdown -->
+	<div class="tripSection">
+		<div class="form-group">
+			<label class="col-md-2 control-label" for="dropdown">Select a Trip</label>
+			<div class="col-md-6">
+				<form th:action="@{/trips/show}" th:object="${id}" method="get">
+					<select class="form-control" id="dropdown" name="id" onchange="this.form.submit()">
+						<option
+								th:each="aTrip: ${trips}"
+								th:value="${aTrip.id}"
+								th:text="${aTrip.name}"
+								th:selected="${aTrip.id == trip.id}">
+						</option>
+					</select>
+				</form>
+			</div>
+
+			<!-- spacing -->
+
+			<label class="label control-label"></label>
+			<div class="col-md-1"></div>
+
+			<!-- edit button -->
+
+			<label class="label control-label"></label>
+			<div class="col-md-1">
+				<form th:action="@{/trips/edit}" method="get">
+					<input type="hidden" name="id" th:value="${trip.id}"/>
+					<input type="submit" class="btn btn-light" value="Edit">
+				</form>
+			</div>
+
+			<!-- add button -->
+
+			<label class="label control-label"></label>
+			<div class="col-md-1">
+				<form th:action="@{/trips/new}" method="get">
+					<input type="submit" class="btn btn-primary" value="Add">
+				</form>
+			</div>
+
+			<!-- delete button -->
+
+			<label class="label control-label"></label>
+			<div class="col-md-1">
+				<form th:action="@{/trips/delete}" method="post">
+					<input type="hidden" name="id" th:value="${trip.id}"/>
+					<input type="submit" class="btn btn-danger" value="Delete">
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- TRIP IMPRESSIONS -->
+
+	<div class="tripSection">
+		<div class="form-group">
+			<label class="col-md-2 control-label" for="impressions">Impressions</label>
+			<div class="col-md-10">
+				<textarea class="form-control" id="impressions" type="text" rows="4" th:text="${trip.impressions}" readonly>
+				</textarea>
+			</div>
+		</div>
+	</div>
+
+	<!-- CONTENT: TRIP PHOTOS AND DESCRIPTIONS -->
+
+	<div class="row">
+		<div class="col-md-8 content">
+
+			<!-- * Article 1: Bootstrap Card -->
+
+			<div class="article1">
+				<div class="card" style="width: 350px; height: 540px;">
+					<img class="card-img-top" th:src="@{${'/myimages/' + trip.firstPhotoLocation}}" style="width: 100%;
+					max-height: 300px; display: block; margin-left: auto; margin-right: auto;">
+					<div class="card-body">
+						<h3 class="card-title" th:text="${trip.firstPhotoTitle}"></h3>
+						<p class="card-text" th:text="${trip.firstPhotoDescription}"></p>
+					</div>
+				</div>
+			</div>
+
+			<!-- * Article 2: Bootstrap Card -->
+
+			<div class="article2">
+				<div class="card bg-light text-dark" style="width: 350px; height: 540px;">
+					<img class="card-img-top" th:src="@{${'/myimages/' + trip.secondPhotoLocation}}" style="width: 100%;
+					max-height: 300px; display: block; margin-left: auto; margin-right: auto;">
+					<div class="card-body">
+						<h3 class="card-title" th:text="${trip.secondPhotoTitle}"></h3>
+						<p class="card-text" th:text="${trip.secondPhotoDescription}"></p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- SIDEBAR: TRIP DATES AND LOCATION -->
+
+		<div class="col-md-4 sidebar">
+
+			<div class="tripSection">
+				<label class="control-label" for="dateFrom">Date From</label>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"> </i> </span>
+					<p class="form-control" id="dateFrom" th:text="${trip.dateFrom}"></p>
+				</div>
+			</div>
+
+			<div class="tripSection">
+				<label class="control-label" for="dateTo">Date To</label>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"> </i> </span>
+					<p class="form-control" id="dateTo" th:text="${trip.dateTo}"></p>
+				</div>
+			</div>
+
+			<div class="tripSection">
+				<label class="control-label" for="location">Location</label>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"> </i> </span>
+					<p class="form-control" th:text="${trip.location}" id="location"></p>
+				</div>
+			</div>
+
+			<style>
+    #map-canvas{
+        width: 300px;
+        height: 300px;
+        float: center;
+        margin-top: 15px;
+    }
+
+			</style>
+
+			<div id="map-canvas"></div>
+
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5A1hMX_3WDOJdyesifIK3VH6dl3h8Y9Q&libraries=places"
+			        type="text/javascript">
+			</script>
+
+			<script>
+
+    var map = new google.maps.Map(document.getElementById('map-canvas'),{
+        center:{
+            lat: 41.39,
+            lng: 2.15
+        },
+        zoom: 10
+    });
+
+    var marker = new google.maps.Marker({
+        position:{
+            lat: 41.39,
+            lng: 2.15
+        },
+        map:map,
+        draggable: true
+    });
+
+    var searchBox = new google.maps.places.SearchBox(document.getElementById('location'));
+    google.maps.event.addListener(searchBox, 'places_changed', function(){
+
+        var places = searchBox.getPlaces();
+
+        var bounds = new google.maps.LatLngBounds();
+        var i, place;
+
+        for(i=0; place=places[i]; i++){
+            bounds.extend(place.geometry.location);
+            marker.setPosition(place.geometry.location);
+        }
+
+        map.fitBounds(bounds);
+        map.setZoom(9);
+
+    });
+
+			</script>
+		</div>
+	</div>
+</div>
 </body>
 </html>

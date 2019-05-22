@@ -1,125 +1,84 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Login Page</title>
+	<meta charset="UTF-8">
+	<title>Login Page</title>
+
+	<script src="https://code.jquery.com/jquery-3.4.0.js"
+	        integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo="
+	        crossorigin="anonymous">
+
+	</script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	      crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	      crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="/css/login-style.css">
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	        crossorigin="anonymous">
+	</script>
+
 </head>
 <body>
-<h2>Welcome, please log in</h2>
-<ul id="menu">
-    <style>
-        body {
-           margin: 0;
-           background: #FFFFFF;
-        }
 
-        #menu {
-           background-color: #0B0719;
-           margin: 0;
-           margin-top: 100px;
-        }
+<!-- HEADER -->
 
-        ul {
-           list-style-type: none;
-           margin: 0;
-           padding: 0;
-           overflow: hidden;
-           background-color: #333;
-        }
+<div class="header">
 
-        #menu li {
-           float: left;
-        }
+	<!-- Navbar Menu -->
 
-        #menu li a {
-           text-decoration: none;
-           text-align: center;
-           display: inline-block;
-           color: #EFEFFB;
-           font-size: 18px;
-           font-weight: 500;
-           font-family: Arial;
-           padding: 12px 18px;
-        }
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a th:href="@{/registration}"><span class="glyphicon glyphicon-pencil"></span> Sign Up</a></li>
+				<li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Sign In</a></li>
+			</ul>
+		</div>
+	</nav>
+</div>
 
-        #menu li a:hover {
-           background-color: #EFEFFB;
-           color: #0A0A2A;
-        }
+<!-- CONTAINER: LOGIN FORM -->
 
-        .active {
-           background-color: #EFEFFB;
-           color: #0A0A2A;
-        }
-    </style>
+<div class="container-fluid bg">
 
-    <li><a href="trips.html">Trips</a></li>
-    <li><a href="profile.html">Profile</a></li>
-    <li><a href="login.html">Login</a></li>
-</ul>
+	<div class="row">
 
-<form action="/login.html">
-    <style>
-        form {
-           border: 3px solid #f1f1f1;
-        }
+		<!-- spacing -->
 
-        input[type="text"], input[type="password"] {
-           width: 100%;
-           padding: 12px 20px;
-           margin: 8px 0;
-           display: inline-block;
-           border: 1px solid #ccc;
-           box-sizing: border-box;
-        }
+		<div class="col-md-4"></div>
 
-        button {
-           background-color: #4CAF50;
-           color: white;
-           padding: 14px 20px;
-           margin-top: 120px;
-           margin: 8px 0;
-           border: none;
-           cursor: pointer;
-           width: 100%;
-        }
+		<!-- Login Form -->
 
-        button:hover {
-           opacity: 0.8;
-        }
+		<div class="col-md-4" style="float: bottom;">
+			<div class="form-container">
+				<form th:action="@{/login}" method="post">
+					<div class="form-group">
+						<legend class="legend"><h2>Welcome to MyTrips</h2></legend>
+					</div>
+					<div><p th:text="${message}"></p></div>
+					<div class="form-group">
+						<label class="control-label" for="username">Username</label>
+						<input type="text" id="username" name="username" placeholder="Enter Username"
+						       required="required"/>
 
-        .registerButton {
-           width: auto;
-           padding: 10px 18px;
-           background-color: #0066ff;
-        }
-
-        .fields {
-           padding: 16px;
-        }
-
-        span.password {
-           float: right;
-           padding-top: 16px;
-        }
-    </style>
-    <div class="fields">
-        <label>Username</label>
-        <input type="text" placeholder="Enter Username" name="username" required>
-
-        <label>Password</label>
-        <input type="password" placeholder="Enter Password" name="password" required>
-
-        <button type="submit">Login</button>
-        <label>
-            <input type="checkbox" checked="checked" name="remember">Remember me
-        </label>
-    </div>
-
-    <div class="fields" style="background-color:#f1f1f1">
-        <button type="button" class="registerButton">Register</button>
-        <span class="password">Forgot <a href="#">password?</a></span>
-    </div>
-</form>
+						<label class="control-label" for="password">Password</label>
+						<input type="password" id="password" name="password" placeholder="Enter Password"
+						       required="required"/>
+						<div><p th:text="${error}"></p></div>
+						<button class="btn btn-danger" onclick="/profile" type="submit">Log In</button>
+						<a th:href="@{/registration}" class="btn btn-primary">Sign Up</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>

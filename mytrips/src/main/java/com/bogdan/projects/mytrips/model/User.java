@@ -1,16 +1,57 @@
 package com.bogdan.projects.mytrips.model;
 
+
+import com.bogdan.projects.mytrips.validator.ValidPassword;
+import com.bogdan.projects.mytrips.validator.ValidPhoneNumber;
+import javax.persistence.*;
+import java.util.Set;
+
 /**
+ * The class User holds the attributes of a user which desires to sign up to this application
+ * This class also represents the blueprint of a user profile, holding the main informations
+ * A user can have many Roles when authenticated to this app
+ * A user can add more Trips
  *
+ * @author Bogdan Butuza
  */
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private String username;
+
+    @ValidPassword
     private String password;
+
+    @Transient
+    private String passwordConfirm;
+
+    @ManyToMany
+    private Set<Role> roles;
+
+    @Column(name = "firstname")
     private String firstName;
+
+    @Column(name = "lastname")
     private String lastName;
-    private String address;
+
     private String city;
-    private int phoneNumber;
+
+    private String address;
+
+    @ValidPhoneNumber
+    private String phone;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -26,6 +67,22 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public String getFirstName() {
@@ -44,14 +101,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getCity() {
         return city;
     }
@@ -60,24 +109,19 @@ public class User {
         this.city = city;
     }
 
-    public int getPhoneNumber() {
-        return phoneNumber;
+    public String getAddress() {
+        return address;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", phoneNumber=" + phoneNumber +
-                '}';
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
